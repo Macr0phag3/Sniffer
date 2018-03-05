@@ -70,6 +70,8 @@ Sniffer(savingPkt = 1, savingPcap = 1, iHost = iHost)
 
    不过肯定会修复的
 
+5. 在Tools中，有HttpServer以及HttpShow，这个是为了更加方便利用cookie而准备的，同样没有完善，后续更新
+
 ## 一些话
 
 目前写的比较粗糙，所以不仅代码奇丑无比，实现也是简单粗暴，后续有时间会改进。欢迎评论以及修改
