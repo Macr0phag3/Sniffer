@@ -161,7 +161,7 @@ class Sniffer:
 	info.append('  [-]Method: %s' %pkt.Method)
 	try:
 	    ua = re.findall('(User-Agent: .+)', str(pkt.payload))
-	except: ua = ''
+	except: ua = '' 
 	
 	if ua: info.append('  [-]%s' %ua[0])
 	else: info.append('  [-]User-Agent:')
