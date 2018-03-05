@@ -44,7 +44,11 @@ Sniffer(savingPkt = 1, savingPcap = 1, iHost = iHost)
 
 ![outputmode](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/outputmode.png)
 
+停止时（Ctrl+c）的截图：
 
+![stop](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/stop.png)
+
+![stop](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/stop1.png)
 
 ## 注意
 
