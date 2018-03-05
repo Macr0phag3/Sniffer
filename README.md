@@ -40,7 +40,7 @@ Sniffer(savingPkt = 1, savingPcap = 1, iHost = iHost)
 
 ![example](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/example.png)
 
-
+![outputmode](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/outputmode.png)
 
 ## 一些话
 
