@@ -24,7 +24,8 @@ def getLocalIP(iface):
 
 def SavePkts(info, name, sfilename, srcIP, Host):
     #saving raw data
-    with open('./Pkts/%s/raw_%s.txt' %(sfilename, name), 'a') as fp: fp.write(info)
+    with open('./Pkts/%s/raw_%s.txt' %(sfilename, name), 'a') as fp: 
+        fp.write(info)
     
     s = './Pkts/%s/%s/%s' %(sfilename, srcIP, Host)
     if not os.path.exists(s): os.makedirs(s)

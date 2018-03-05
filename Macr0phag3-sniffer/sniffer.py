@@ -104,26 +104,34 @@ class Sniffer:
 		print putColor(traceback.format_exc(), 'white')
 
 
+
     def Collector(self, pkt):
-        self.AllPackages += 1
-        #print pkt.summary()
-        if pkt.haslayer(http.HTTPRequest): 
-	    self.FoundRequest(pkt)
+	try: 
+	    self.AllPackages += 1
+	    #print pkt.summary()
+	    if pkt.haslayer(http.HTTPRequest): 
+		self.FoundRequest(pkt)
+		
+		#Use plug-in?
+		if '10.255.44.33' in [pkt.src, pkt.dst]: self.Plugin(pkt, 'pwd')	    
+		
+	    print '\r  [%s]' %self.sign[self.AllPackages%4] + putColor(
+		'AllPackages %d' %self.AllPackages, 'white'), '  ' + putColor(
+		    'RequestPackages %d' %self.RequestPackages, 'blue'), '  ' + putColor(
+		        'CookiePackages %d' %self.CookiePackages,'cyan'), '  ' + putColor(
+		            'PostPackages %d' %self.PostPackages, 'yellow'), '  ',
 	    
-	    #Use plug-in?
-	    if '10.255.44.33' in [pkt.src, pkt.dst]: self.Plugin(pkt, 'pwd')	    
-	    
-        print '\r  [%s]' %self.sign[self.AllPackages%4] + putColor(
-            'AllPackages %d' %self.AllPackages, 'white'), '  ' + putColor(
-                'RequestPackages %d' %self.RequestPackages, 'blue'), '  ' + putColor(
-                    'CookiePackages %d' %self.CookiePackages,'cyan'), '  ' + putColor(
-                        'PostPackages %d' %self.PostPackages, 'yellow'), '  ',
-	
-        Clear()
-	if self.savingPcap: 
-	    try:
-		self.pktdump.write(pkt)
-	    except: pass
+	    Clear()
+	    if self.savingPcap: 
+		try:
+		    self.pktdump.write(pkt)
+		except: pass
+		
+	except Exception, e:
+	    if 'UnicodeEncodeError' in str(e): pass
+	    else: 
+		print e
+		kill
 	
 
     def FoundRequest(self, pkt):
