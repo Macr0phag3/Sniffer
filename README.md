@@ -40,11 +40,15 @@ Sniffer(savingPkt = 1, savingPcap = 1, iHost = iHost)
 
 ![example](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/example.png)
 
+捕获cookie时的截图：
+
 ![outputmode](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/outputmode.png)
 
 ## 一些话
 
-目前写的比较粗糙，所以不仅代码奇丑无比，实现也是简单粗暴，后续有时间会改进
+目前写的比较粗糙，所以不仅代码奇丑无比，实现也是简单粗暴，后续有时间会改进。欢迎评论以及修改
+
+（仅限学术交流，用于非法用途概不负责）
 
  # English
 
