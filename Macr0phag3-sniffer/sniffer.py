@@ -128,7 +128,7 @@ class Sniffer:
 		except: pass
 		
 	except Exception, e:
-	    if 'UnicodeEncodeError' in str(e): pass
+	    if 'ascii' in str(e): pass
 	    else: 
 		print e
 		kill
