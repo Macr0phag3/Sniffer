@@ -72,11 +72,11 @@ def Abandon(sfilename, tfile):
     if tfile == 'pkt':
         if raw_input('[!]%s [yes: yes/others: no]: ' %(putColor('Abandon this Pkts file?', 'red'))) == "yes": 
             commands.getoutput('sudo rm -r ./Pkts/%s/' %(sfilename))
-            print '  [-]%s' %putColor('Delete this Pkts Done!', 'yellow')
+            print '  [-]%s' %putColor('Pkts deletion has completed successfully!', 'yellow')
     elif tfile == 'pcap': 
         if raw_input('[!]%s [yes: yes/others: no]: ' %(putColor('Abandon this Pcap file?', 'red'))) == "yes": 
             commands.getoutput('sudo rm ./Pcaps/%s.pcap' %(sfilename))
-            print '  [-]%s' %putColor('Delete this Pcap Done!', 'yellow')    
+            print '  [-]%s' %putColor('Pcaps deletion has completed successfully!', 'yellow')    
 
     
 def HtmlShow(name):  
