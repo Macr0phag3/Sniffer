@@ -44,6 +44,32 @@ Sniffer(savingPkt = 1, savingPcap = 1, iHost = iHost)
 
 ![outputmode](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/outputmode.png)
 
+
+
+## 注意
+
+1. 需要的库：
+
+   scapy
+
+   scapy_http
+
+   termcolor
+
+
+
+## 后续更新
+
+1. 简化实现，美化代码（逃
+
+2. 我虽然写了运行环境的自动检查以及修复，但是不够完善
+
+3. 代码中有插件功能，用意是捕获到指定的数据包时，可以由插件来完成后续的工作。例如，我校的校园网帐号密码可以用cookie拿到，那么这个功能就可以写成插件。弄插件的另一个目的是分离核心代码与其他代码。
+
+4. 偶尔会出现奇奇怪怪的编码问题，由于出现的概率比较低，暂时先不管（逃
+
+   不过肯定会修复的
+
 ## 一些话
 
 目前写的比较粗糙，所以不仅代码奇丑无比，实现也是简单粗暴，后续有时间会改进。欢迎评论以及修改
