@@ -38,7 +38,7 @@ iHost = ['www.baidu.com']
 Sniffer(savingPkt = 1, savingPcap = 1, iHost = iHost)
 ```
 
-
+![example](https://github.com/Macr0phag3/Sniffer/tree/master/PicForReadme/example.png)
 
 
 
