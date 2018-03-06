@@ -63,6 +63,9 @@ Sniffer(savingPkt = 1, savingPcap = 1)
 
    termcolor
 
+2. Python版本
+
+   2.x
 
 
 ## 后续更新
