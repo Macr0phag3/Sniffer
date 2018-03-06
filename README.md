@@ -16,6 +16,8 @@
 
 然后又发现了add在freebuf发的[一篇文章](http://www.freebuf.com/articles/network/129721.html)，进而对写一个嗅探器愈发有兴趣，于是就有了这个工具。
 
+总之一句话，这个工具是用来嗅探开放WLAN下的数据包，具体嗅探的是含Cookie或者Method为Post的数据包。
+
 ## 食用方法
 
 嗅探器是一个类，有以下参数：
@@ -23,7 +25,7 @@
 1. iface：可选参数；嗅探使用的原始无线网卡的名字，若不填则代码会自动指定无线网卡
 2. newiface：可选参数；默认值为‘mon0’；由于嗅探需要开启无线网卡的监听模式（monitor），这个是将原始无线网卡改为监听模式后的名字（改为监听模式并非直接改原无线网卡，而是生成一个处于监控模式的虚拟无线网卡）。
 3. filename：可选参数；默认为空；嗅探器可以实时嗅探，也可以解析本地的pcap包，这个参数就是本地pcaps包的名字，注意一定要放在Pcaps目录里；只需填写文件名；
-4. outputmode：可选参数；默认为1；嗅探器一旦发现cookie或者post的包，就会进行对应的输出，若不想看见实时输出，则置0，否则置1。
+4. outputmode：可选参数；默认为1；嗅探器一旦发现Cookie或者Post的包，就会进行对应的输出，若不想看见实时输出，则置0，否则置1。
 5. savingPkt：可选参数；默认为1；嗅探器发现符合filter的数据时，会对输出的结果进行保存；若不想保存这些结果，置0；默认保存在Pkts下
 6. savingPcap：可选参数；默认为0；嗅探器可以保存符合filter的原始数据包；1为保存；0为不保存；默认保存在Pcaps下
 7. filtermode：可选参数；默认为空；与scapy的过滤语法一致，对数据包进行过滤；代码在后面默认过滤自己的ip，以及只嗅探web相关的包；
@@ -32,8 +34,7 @@
 举个例子：
 
 ```
-iHost = ['www.baidu.com']
-Sniffer(savingPkt = 1, savingPcap = 1, iHost = iHost)
+Sniffer(savingPkt = 1, savingPcap = 1)
 ```
 
 ![example](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/example.png)
