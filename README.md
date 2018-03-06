@@ -33,13 +33,19 @@
 
 
 
-运行方式：`sudo python sniffer.py`
-
 举个例子：
 
 ```
 Sniffer(savingPkt = 1, savingPcap = 1)
 ```
+
+
+
+运行方式：`sudo python sniffer.py`
+
+
+
+运行截图：
 
 ![example](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/example.png)
 
