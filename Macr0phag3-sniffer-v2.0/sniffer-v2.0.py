@@ -193,8 +193,9 @@ class Sniffer:
         #
         if plugname == 'fhost':
             flist = []
-
-            if re.search('(%s)' %')|('.join(flist), pkt.Host): return False
+            if flist and re.search('(%s)' %')|('.join(flist), pkt.Host): 
+                print 666
+                return False
             return True
 
 
