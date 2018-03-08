@@ -20,12 +20,14 @@ def CheckEnvir():
     except:
         Name.append('termcolor')
         
-    if Name: autoFix(Name)
+    if Name: 
+        if not autoFix(Name): return False
     
     return True
     
 
 def autoFix(Name):
+    exitflag = 0
     print '[Uninstalled] %s' %(', '.join(Name))
     
     if raw_input('[+]Maybe you want me to fix it? [y/n] ') != 'y':
@@ -40,12 +42,14 @@ def autoFix(Name):
                 print 'Successfully!'
             else:
                 print '[Failed] You should install %s by yourself :(' %name
+                exitflag = 1
                 
         except Exception, e:
             print '[!]Oops, Failed! You should fix it by yourself. Sorry :('
             print '  [-]Error:', e, '\n'
             return False
-        
+    
+    if exitflag: return False
     from termcolor import colored
     print '[*]' + colored('All Done!', color = 'green', attrs = ['bold']), '\n'
     return True        

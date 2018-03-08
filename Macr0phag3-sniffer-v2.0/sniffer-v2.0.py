@@ -5,7 +5,7 @@ import re
 import time
 from Toolbox.EnvirTools import *
 
-CheckEnvir()
+if not CheckEnvir(): sys.exit(1)
 
 from Toolbox.ColorTools import *
 from Toolbox.FileTools import *
