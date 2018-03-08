@@ -30,7 +30,7 @@ class Sniffer:
 *|_|  |_|\__,_|\___|_|   \___/| .__/|_| |_|\__,_|\__, |____/       *
 *                             |_|                |___/      %s*
 ********************************************************************
-"""%(putColor('Tr0y', 'cyan'), putColor('v1.0', 'yellow'),
+"""%(putColor('Tr0y', 'cyan'), putColor('v2.0', 'yellow'),
      putColor('Sniffer', 'green')), 'blue')
     print pic
 
