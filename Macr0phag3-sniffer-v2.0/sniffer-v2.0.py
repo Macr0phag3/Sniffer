@@ -3,13 +3,13 @@ import traceback
 import sys
 import re
 import time
-from Toolbox.ColorTools import *
 from Toolbox.EnvirTools import *
-from Toolbox.FileTools import *
-from Toolbox.IfaceTools import *
 
 CheckEnvir()
 
+from Toolbox.ColorTools import *
+from Toolbox.FileTools import *
+from Toolbox.IfaceTools import *
 from scapy.all import *
 from scapy.utils import PcapWriter
 import scapy_http.http as http
