@@ -10,9 +10,9 @@ def InitPktsFile(sfilename):
     
 def ErrorDog(Exit):
     error = '\n'.join(['\n[X]%s' %putColor('Something went wrong', 'red'),
-                                 '  [-]'+putColor('Time: ', 'yellow')+putColor(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()),'green'),
-                                 '  [-]'+putColor('Exception: \n', 'yellow')+putColor(str(traceback.format_exc())[:-1], 'white'),
-                                 '-'*50, 
+                       '  [-]'+putColor('Time: ', 'yellow')+putColor(time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()),'green'),
+                       '  [-]'+putColor('Exception: \n', 'yellow')+putColor(str(traceback.format_exc())[:-1], 'white'),
+                       '-'*50, 
                        ])
     
     with open('Log.here', 'a') as fp:
