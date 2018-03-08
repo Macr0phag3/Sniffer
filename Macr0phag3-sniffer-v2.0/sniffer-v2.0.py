@@ -13,7 +13,7 @@ CheckEnvir()
 from scapy.all import *
 from scapy.utils import PcapWriter
 import scapy_http.http as http
-
+ 
 
 class Sniffer:
     AllPackages = 0
