@@ -4,37 +4,48 @@ import sys
 
 
 def CheckEnvir():
+    Name = []
     try:
         import scapy
-        import scapy_http.http as http
-        from termcolor import colored
-        return True
     except:
-        print '[!]Oh, something went wrong!'
-        if raw_input('[+]Maybe you want me to fix it? [y/n] ') == 'y':
-            if autoFix(): return True
-            
-        return sys.exit(1)
-
-def autoFix():
-    try:
-        print '  [-]Install scapy... ',
-        commands.getoutput('sudo pip install scapy')
-        print 'Successfully!'
-        
-        print '  [-]Install scapy-http... ',
-        commands.getoutput('sudo pip install scapy-http')
-        print 'Successfully!'
-        
-        print '  [-]Install termcolor... ', 
-        commands.getoutput('sudo pip install termcolor')
-        print 'Successfully!'
-        
-        from termcolor import colored
-        print '[*]' + colored('Successfully!', color = 'green', attrs = ['bold']), '\n'
-        return True
+        Name.append('scapy')
     
-    except Exception, e:
-        print '[!]Oops, Failed! You should fix it by yourself. Sorry :('
-        print '  [-]Error:', e, '\n'
-        return sys.exit(1)
+    try:
+        import scapy_http.http as http
+    except:
+        Name.append('scapy_http')
+    
+    try:
+        from termcolor import colored
+    except:
+        Name.append('termcolor')
+        
+    if Name: autoFix(Name)
+    
+    return True
+    
+
+def autoFix(Name):
+    print '[Uninstalled] %s' %(', '.join(Name))
+    
+    if raw_input('[+]Maybe you want me to fix it? [y/n] ') != 'y':
+        return False
+    
+    for name in Name:
+        try:
+            print '  [-]Install %s... ' %name,
+            sys.stdout.flush()
+            result = commands.getoutput('sudo pip install %s' %name)
+            if 'Successfully installed' in result:
+                print 'Successfully!'
+            else:
+                print '[Failed] You should install %s by yourself :(' %name
+                
+        except Exception, e:
+            print '[!]Oops, Failed! You should fix it by yourself. Sorry :('
+            print '  [-]Error:', e, '\n'
+            return False
+        
+    from termcolor import colored
+    print '[*]' + colored('All Done!', color = 'green', attrs = ['bold']), '\n'
+    return True        
