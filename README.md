@@ -69,7 +69,17 @@ Sniffer(savingPkt = 1, savingPcap = 1)
 
    ​
 
-2. Python版本
+2. 配置：
+
+   Ubuntu（其他Linux应该也可以）
+
+   `pip`，`iw`，`iwconfig`，`ifconfig` 需可用
+
+   以管理员权限运行
+
+   ​
+
+3. Python版本
 
    2.x
 
