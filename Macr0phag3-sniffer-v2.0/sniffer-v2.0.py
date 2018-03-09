@@ -13,7 +13,7 @@ from Toolbox.IfaceTools import *
 from scapy.all import *
 from scapy.utils import PcapWriter
 import scapy_http.http as http
- 
+
 
 class Sniffer:
     AllPackages = 0
@@ -167,10 +167,11 @@ class Sniffer:
         info.append('  [-]Method: %s' %pkt.Method)
         try:
             ua = re.findall('(User-Agent: .+)', str(pkt.payload))
-        except: ua = ''
-
-        if ua: info.append('  [-]%s' %ua[0])
-        else: info.append('  [-]User-Agent:')
+            info.append('  [-]%s' %ua[0])
+        except: 
+            info.append('  [-]User-Agent:')
+            
+        if not pkt.Host: pkt.Host = ''
         info.append('  [-]Host: %s' %putColor(pkt.Host, 'green'))
         info.append('  [-]Url: %s' %(pkt.Host + pkt.Path))
         if method == 'Post': info.append('  [-]PostDatas: %s' %putColor(pkt.load, 'yellow'))
@@ -190,12 +191,14 @@ class Sniffer:
         #Such as: mode name is PPPPPPPrint
         #Then you should use: 
         #import Plugin.PPPPPPPrint
-        #
+        #           
         if plugname == 'fhost':
             flist = []
-            if flist and re.search('(%s)' %')|('.join(flist), pkt.Host): 
-                print 666
-                return False
+            
+            if pkt.Host:
+                if flist and re.search('(%s)' %')|('.join(flist), pkt.Host): 
+                    return False
+            
             return True
 
 
@@ -208,7 +211,8 @@ class Sniffer:
 
         if self.savingPkt: 
             print '\n[!]Analysing data...'
-            Analysis(self.sfilename, self.iHost)	    
+            Analysis(self.sfilename, self.iHost)
+            #self.Plugin(None, 'QzoneCookie')
             print '\n[*]The name of Pkts dirPath is: ./Pkts/%s/' %putColor(self.sfilename, 'green')
             Abandon(self.sfilename, 'pkt')# Abandon this Pkts and Pcap?
 
@@ -216,11 +220,13 @@ class Sniffer:
             print '\n[*]The name of Pcap is: ./Pcaps/%s' %putColor(self.sfilename, 'green')
             Abandon(self.sfilename, 'pcap')# Abandon this Pkts and Pcap?
 
+        
         print '\n[!]All Done!'
         print '[*]' + putColor('Have a nice day~ :)', 'green')		
+
 
 
 iHost = []
 
 Sniffer(savingPkt = 1, savingPcap = 1, iHost = iHost)
-#Sniffer(filename='test.pcap', savingPkt = 0, iHost = iHost)
+#Sniffer(filename='test.pcap', savingPkt = 1, iHost = iHost)
