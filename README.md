@@ -67,7 +67,7 @@ Sniffer(savingPkt = 1, savingPcap = 1)
 
    嗅探器在启动的时候也会自动检查环境并进行修复。
 
-   ​
+   修复是直接使用`sudo pip install` 语句，若电脑中存在多版本的python，注意一下pip的使用，可能需要修改ToolBox中`EnvirTools` 的`autoFix`函数语句。
 
 2. 配置：
 
