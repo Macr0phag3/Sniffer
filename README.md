@@ -69,6 +69,8 @@ Sniffer(savingPkt = 1, savingPcap = 1)
 
    修复是直接使用`sudo pip install` 语句，若电脑中存在多版本的python，注意一下pip的使用，可能需要修改ToolBox中`EnvirTools` 的`autoFix`函数语句。
 
+   ​
+
 2. 配置：
 
    Ubuntu（其他Linux应该也可以）
