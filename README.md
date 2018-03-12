@@ -114,7 +114,7 @@ Sniffer(savingPkt = 1, savingPcap = 1)
 
 （仅限学术交流，用于非法用途概不负责）
 
-原理会先写在[我的博客](www.tr0y.wang)上，有空会搬到Gayhub来
+原理会先写在[我的博客](http://www.tr0y.wang)上，有空会搬到Gayhub来
 
  # English
 
