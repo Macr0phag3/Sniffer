@@ -98,14 +98,14 @@ Sniffer(savingPkt = 1, savingPcap = 1)
 
 3. Python版本
 
-   2.x
+   2.x and 3.x
 
 
 ## 版本更新
 
 1. v1.0：实现基本功能
 2. v2.0：简化代码，完善自动检查环境脚本，修复n个Bug
-3. v3.0：移植到Py 3.x，兼容Py2.x（未完成
+3. v2.0 Py3.x：移植到Py 3.x
 
 ## 后续更新
 
