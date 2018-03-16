@@ -8,7 +8,8 @@ def CheckEnvir():
     try:
         import scapy
     except:
-        Name.append('scapy')
+        print('  [-]Please install scapy by yourself [http://scapy.readthedocs.io/en/latest/installation.html]')
+        return False
     
     try:
         import scapy_http.http as http
@@ -30,14 +31,14 @@ def autoFix(Name):
     exitflag = 0
     print('[Uninstalled] %s' %(', '.join(Name)))
     
-    if raw_input('[+]Maybe you want me to fix it? [y/n] ') != 'y':
+    if input('[+]Maybe you want me to fix it? [y/n] ') != 'y':
         return False
     
     for name in Name:
         try:
             print('  [-]Install %s... ' %name,)
             sys.stdout.flush()
-            result = subprocess.getoutput('sudo pip install %s' %name)
+            result = subprocess.getoutput('sudo pip3 install %s' %name)
             if 'Successfully installed' in result:
                 print('Successfully!')
             else:
