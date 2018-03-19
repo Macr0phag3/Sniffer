@@ -18,7 +18,9 @@
 
 总之一句话，这个工具是用来嗅探开放WLAN下的数据包，具体嗅探的是含Cookie或者Method为Post的数据包。
 
-## 食用方法(V2.0及以下)
+## 食用方法
+
+### V2.0及以下
 
 嗅探器是一个类，有以下参数：
 
@@ -65,6 +67,10 @@ Sniffer(savingPkt = 1, savingPcap = 1)
 ![stop](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/stop.png)
 
 ![stop](https://github.com/Macr0phag3/Sniffer/blob/master/PicForReadme/stop1.png)
+
+### V3.0及以上
+
+v3.0开始均为命令行参数，具体可以使用`-h` 参数来获得详细帮助信息
 
 ## 注意
 
