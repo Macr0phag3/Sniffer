@@ -60,6 +60,8 @@ class Sniffer:
         if self.iface == '' and filename: 
             print(putColor('[!]Offline Mode!', 'green'))
             print('  [-]Filter:', putColor(self.filtermode, 'green'))
+            print('  [-]', end='')
+            ClearLine() 
             pkt = sniff(offline = './Pcaps/' + filename,    
                         prn = self.Collector,    
                         filter = self.filtermode,   
