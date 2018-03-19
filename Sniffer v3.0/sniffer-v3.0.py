@@ -33,33 +33,33 @@ class Sniffer:
 
     def __init__(self):       
         parser = argparse.ArgumentParser(description='Version: 3.0; Running in Py2.x')
-        parser.add_argument("-i", '--iface', default='', help="which interface you want to use")
-        parser.add_argument("-mi", '--moniface', default='mon0', help="which interface you want to use")
-        parser.add_argument("-f", '--filename', default='', help="local pcap filename(in the offline mode)")
-        parser.add_argument("-o", '--outputmode', default='1', help="show msg in the terminal? 0: No, 1: Yes")
-        parser.add_argument("-sPkt", '--savingPkt', default='1', help="save Pkts during snifffing? 0: No, 1: Yes")
-        parser.add_argument("-sPcap", '--savingPcap', default='0', help="save Pcap during snifffing? 0: No, 1: Yes")
-        parser.add_argument("-fm", '--filtermode', default='', help="filter syntax used in scapy")
-        parser.add_argument("-iHF", '--iHostFile', default='iHost.txt', help="highlight these hosts when stop the sniffer(in the iHost.txt")
+        parser.add_argument("-i", default='', help="the interface you want to use")
+        parser.add_argument("-mi", default='mon0', help="name of the interface in monitor mode")
+        parser.add_argument("-f", default='', help="local pcap filename(in the offline mode)")
+        parser.add_argument("-o", default='1', help="show msg in the terminal? 0: No, 1: Yes")
+        parser.add_argument("-sPkt", default='1', help="save Pkts during snifffing? 0: No, 1: Yes")
+        parser.add_argument("-sPcap", default='0', help="save Pcap during snifffing? 0: No, 1: Yes")
+        parser.add_argument("-fm", default='', help="filter syntax used in scapy")
+        parser.add_argument("-iHF", default='iHost.txt', help="highlight these hosts when stop the sniffer(in the iHost.txt")
         args = parser.parse_args() 
         
-        self.iface = args.iface #old interface 
-        self.newiface = args.moniface #a new interface in monitor mode
+        self.iface = args.i #old interface 
+        self.newiface = args.mi #a new interface in monitor mode
         self.sign = ['—','\\' ,'|' ,'/'] #stupid thing :)
-        self.filename = args.filename #local pcap filename
+        self.filename = args.f #local pcap filename
         self.sfilename = str(int(time.time()))
-        self.outputmode = args.outputmode #0->don't output, 1->output
-        self.savingPkt = args.savingPkt #0->don't save, 1->save
-        self.savingPcap = args.savingPcap
+        self.outputmode = args.o #0->don't output, 1->output
+        self.savingPkt = args.sPkt #0->don't save, 1->save
+        self.savingPcap = args.sPcap
         self.filtermode = '( tcp[13:1]==24 )'#'tcp[13:1]==24' -> only sniff tcp
             
-        if args.filtermode: self.filtermode += ' and ( %s )' %args.filtermode #
+        if args.fm: self.filtermode += ' and ( %s )' %args.fm #
 
         if self.savingPkt == '1': InitPktsFile(self.sfilename)
         if self.savingPcap == '1': self.pktdump = PcapWriter("./Pcaps/%s.pcap" %(self.sfilename), append=True, sync=True)
         
         try:
-            with open(args.iHostFile, 'r') as fp:
+            with open(args.iHF, 'r') as fp:
                 self.iHost = re.findall('(\S+)', fp.read())
         except:
             self.iHost = []
