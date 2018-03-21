@@ -197,7 +197,7 @@ class Sniffer:
         if self.savingPkt == '1': 
             SavePkts(Eraser('\n'.join(info)+'\n'+'-'*60 + '\n'), method, self.sfilename, pkt.src, pkt.Host)
 
-        if self.outputmode:
+        if self.outputmode == '1':
             print '\r' + ' '*200 + '\n' + '\n'.join(info)
 
         #self.Plugin(None, 'QzoneCookie[now]', args=[pkt.src, pkt.Cookie])
