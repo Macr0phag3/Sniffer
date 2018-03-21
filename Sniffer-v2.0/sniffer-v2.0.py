@@ -117,7 +117,7 @@ class Sniffer:
                 self.FoundRequest(pkt)
 
                 #Use plug-in?
-                #if '10.255.44.33' in [pkt.src, pkt.dst]: self.Plugin(pkt, 'pwd')	    
+                #if '10.XX.XX.XX' in [pkt.src, pkt.dst]: self.Plugin(pkt, 'pwd')	    
 
             print '\r  [%s]' %self.sign[self.AllPackages%4] + putColor(
                 'AllPackages %d' %self.AllPackages, 'white'), '  ' + putColor(
