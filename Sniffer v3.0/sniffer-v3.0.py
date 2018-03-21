@@ -52,7 +52,8 @@ class Sniffer:
         self.savingPkt = args.sPkt #0->don't save, 1->save
         self.savingPcap = args.sPcap
         self.filtermode = '( tcp[13:1]==24 )'#'tcp[13:1]==24' -> only sniff tcp
-            
+        self.SrcIP = []
+        
         if args.fm: self.filtermode += ' and ( %s )' %args.fm #
 
         if self.savingPkt == '1': InitPktsFile(self.sfilename)
@@ -135,8 +136,9 @@ class Sniffer:
                 'AllPackages %d' %self.AllPackages, 'white'), '  ' + putColor(
                     'RequestPackages %d' %self.RequestPackages, 'blue'), '  ' + putColor(
                         'CookiePackages %d' %self.CookiePackages,'cyan'), '  ' + putColor(
-                            'PostPackages %d' %self.PostPackages, 'yellow'), '  ',
-
+                            'PostPackages %d' %self.PostPackages, 'yellow'), '  ' + putColor(
+                                'HostNum %d' %len(self.SrcIP), 'white'), '  ',
+    
             ClearLine()
 
         except Exception, e:
@@ -175,6 +177,7 @@ class Sniffer:
         else: colormethod = 'cyan'        
         info = ['[%s]Found %s' %(putColor(time.strftime("%H:%M:%S", time.localtime()), 'white'), putColor(method, colormethod))]
         info.append('[+]From %s to %s' %(putColor(pkt.src, 'blue'), pkt.dst))
+        if pkt.src not in self.SrcIP: self.SrcIP.append(pkt.src)
         info.append('  [-]Method: %s' %pkt.Method)
         try:
             ua = re.findall('(User-Agent: .+)', str(pkt.payload))
@@ -182,8 +185,9 @@ class Sniffer:
         except: 
             info.append('  [-]User-Agent:')
             
-        if not pkt.Host: pkt.Host = ''
+        if not pkt.Host: pkt.Host = 'Unknow'
         info.append('  [-]Host: %s' %putColor(pkt.Host, 'green'))
+        
         info.append('  [-]Url: %s' %(pkt.Host + pkt.Path))
         if method == 'Post': info.append('  [-]PostDatas: %s' %putColor(pkt.load, 'yellow'))
 
@@ -195,6 +199,8 @@ class Sniffer:
 
         if self.outputmode:
             print '\r' + ' '*200 + '\n' + '\n'.join(info)
+
+        self.Plugin(None, 'QzoneCookie[now]', args=[pkt.src, pkt.Cookie])
 
 
     def Plugin(self, pkt, plugname):
