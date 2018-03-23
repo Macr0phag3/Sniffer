@@ -3,6 +3,7 @@ import traceback
 import sys
 import re
 import time
+import commands
 from Toolbox.EnvirTools import *
 
 if not CheckEnvir(): sys.exit(1)
@@ -20,7 +21,6 @@ class Sniffer:
     RequestPackages = 0
     CookiePackages = 0
     PostPackages = 0
-
     pic = '''
 [1m[36m     _______..__   __. [0m[1m[31m __ [0m [1m[36m _______  _______  _______ .______      [0m
 [1m[36m    /       ||  \ |  | [0m[1m[31m|  |[0m [1m[36m|   ____||   ____||   ____||   _  \     [0m
@@ -41,6 +41,7 @@ class Sniffer:
         parser.add_argument("-sPcap", default='0', help="save Pcap during snifffing? 0: No, 1: Yes")
         parser.add_argument("-fm", default='', help="filter syntax used in scapy")
         parser.add_argument("-iHF", default='iHost.txt', help="highlight these hosts when stop the sniffer(in the iHost.txt")
+        parser.add_argument("-fHF", default='fHost.txt', help="filter these hosts when show msg in terminal(in the fHost.txt")
         args = parser.parse_args() 
         
         self.iface = args.i #old interface 
@@ -53,6 +54,7 @@ class Sniffer:
         self.savingPcap = args.sPcap
         self.filtermode = '( tcp[13:1]==24 )'#'tcp[13:1]==24' -> only sniff tcp
         self.SrcIP = []
+        self.fHF = args.fHF
         
         if args.fm: self.filtermode += ' and ( %s )' %args.fm #
 
@@ -63,7 +65,6 @@ class Sniffer:
             with open(args.iHF, 'r') as fp:
                 self.iHost = re.findall('(\S+)', fp.read())
         except:
-            self.iHost = []
             ErrorDog(self.Exit)
             
         if self.iface == '' and self.filename: 
@@ -128,17 +129,14 @@ class Sniffer:
             self.AllPackages += 1
             if pkt.haslayer(http.HTTPRequest): 
                 self.FoundRequest(pkt)
-
-                #Use plug-in?
-                #if '10.XX.XX.XX' in [pkt.src, pkt.dst]: self.Plugin(pkt, 'pwd')	    
-
+                
             print '\r  [%s]' %self.sign[self.AllPackages%4] + putColor(
                 'AllPackages %d' %self.AllPackages, 'white'), '  ' + putColor(
                     'RequestPackages %d' %self.RequestPackages, 'blue'), '  ' + putColor(
                         'CookiePackages %d' %self.CookiePackages,'cyan'), '  ' + putColor(
                             'PostPackages %d' %self.PostPackages, 'yellow'), '  ' + putColor(
                                 'HostNum %d' %len(self.SrcIP), 'white'), '  ',
-    
+
             ClearLine()
 
         except Exception, e:
@@ -200,17 +198,24 @@ class Sniffer:
         if self.outputmode == '1':
             print '\r' + ' '*200 + '\n' + '\n'.join(info)
 
-        #self.Plugin(None, 'QzoneCookie[now]', args=[pkt.src, pkt.Cookie])
-
-
-    def Plugin(self, pkt, plugname):
+        #self.Plugin(None, 'QzoneCookie', args=[pkt.src, pkt.Cookie])
+        
+    def Plugin(self, pkt, plugname, args=[]):
         #Your plug-in in ./Plugin
         #Such as: mode name is PPPPPPPrint
         #Then you should use: 
         #import Plugin.PPPPPPPrint
-        #           
+        
+        #if plugname == 'QzoneCookie':
+        #    import Plugin.QzoneCookie as Qzone
+        #    Qzone.QzoneCookieUsage(args)
+
         if plugname == 'fhost':
-            flist = [] #filter these hosts during sniffing
+            try:
+                with open(self.fHF, 'r') as fp:
+                    flist = re.findall('(\S+)', fp.read())
+            except: 
+                ErrorDog(self.Exit)
             
             if pkt.Host:
                 if flist and re.search('(%s)' %')|('.join(flist), pkt.Host): 
@@ -229,14 +234,12 @@ class Sniffer:
         if self.savingPkt == '1': 
             print '\n[!]Analysing data...'
             Analysis(self.sfilename, self.iHost)
-            #self.Plugin(None, 'QzoneCookie')
             print '\n[*]The name of Pkts dirPath is: ./Pkts/%s/' %putColor(self.sfilename, 'green')
             Abandon(self.sfilename, 'pkt')# Abandon this Pkts and Pcap?
 
         if self.savingPcap == '1': 
             print '\n[*]The name of Pcap is: ./Pcaps/%s' %putColor(self.sfilename, 'green')
             Abandon(self.sfilename, 'pcap')# Abandon this Pkts and Pcap?
-
         
         print '\n[!]All Done!'
         print '[*]' + putColor('Have a nice day~ :)', 'green')		
