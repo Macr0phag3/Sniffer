@@ -167,7 +167,7 @@ class Sniffer:
                 self.PostPackages -= 1
 
                 if 'byte' not in e: 
-                    ErrorDog(self.Exit)         
+                    ErrorDog(self.Exit)
 
 
     def ExtractInfo(self, pkt, method):
@@ -187,7 +187,7 @@ class Sniffer:
         info.append('  [-]Host: %s' %putColor(pkt.Host, 'green'))
         
         info.append('  [-]Url: %s' %(pkt.Host + pkt.Path))
-        if method == 'Post': info.append('  [-]PostDatas: %s' %putColor(pkt.load, 'yellow'))
+        if method == 'Post': info.append('  [-]PostDatas: %s' %putColor(re.sub('[^\x20-\x7E]', '.', pkt.load), 'yellow'))
 
         if pkt.Cookie == None: pkt.Cookie = '' 
         info.append('  [-]Cookie: %s' %putColor(pkt.Cookie, 'yellow'))     
@@ -198,7 +198,7 @@ class Sniffer:
         if self.outputmode == '1':
             print '\r' + ' '*200 + '\n' + '\n'.join(info)
 
-        #self.Plugin(None, 'QzoneCookie', args=[pkt.src, pkt.Cookie])
+            #self.Plugin(None, 'QzoneCookie', args=[pkt.src, pkt.Cookie])
         
     def Plugin(self, pkt, plugname, args=[]):
         #Your plug-in in ./Plugin
