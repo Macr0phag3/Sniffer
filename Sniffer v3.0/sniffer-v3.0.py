@@ -210,6 +210,7 @@ class Sniffer:
         #    import Plugin.QzoneCookie as Qzone
         #    Qzone.QzoneCookieUsage(args)
 
+        #And you can use Notify() to notify yourself when the plug found some interesting things.
         if plugname == 'fhost':
             try:
                 with open(self.fHF, 'r') as fp:
@@ -226,6 +227,8 @@ class Sniffer:
 
     def Exit(self):
         print '\n[!]Shutting Down...'
+        Notify("Sniffer", "Sniffing stoped!") # notify you when stop sniffing. 
+        
         if self.filename == '': 
             print '  [-]Down %s...' %self.newiface
             print '  [-]Del %s...' %self.newiface	    
