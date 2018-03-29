@@ -183,7 +183,7 @@ class Sniffer:
         except: 
             info.append('  [-]User-Agent:')
             
-        if not pkt.Host: pkt.Host = 'Unknow'
+        if not pkt.Host: pkt.Host = ''
         info.append('  [-]Host: %s' %putColor(pkt.Host, 'green'))
         
         info.append('  [-]Url: %s' %(pkt.Host + pkt.Path))
