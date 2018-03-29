@@ -198,7 +198,7 @@ class Sniffer:
         if self.outputmode == '1':
             print '\r' + ' '*200 + '\n' + '\n'.join(info)
 
-            #self.Plugin(None, 'QzoneCookie', args=[pkt.src, pkt.Cookie])
+        self.Plugin(None, 'QzoneCookie', args=[pkt.src, pkt.Cookie])
         
     def Plugin(self, pkt, plugname, args=[]):
         #Your plug-in in ./Plugin
@@ -211,6 +211,12 @@ class Sniffer:
         #    Qzone.QzoneCookieUsage(args)
 
         #And you can use Notify() to notify yourself when the plug found some interesting things.
+        
+        if plugname == 'QzoneCookie':
+            import Plugin.QzoneCookie as Qzone
+            Qzone.QzoneCookieUsage(args)
+            
+            
         if plugname == 'fhost':
             try:
                 with open(self.fHF, 'r') as fp:
