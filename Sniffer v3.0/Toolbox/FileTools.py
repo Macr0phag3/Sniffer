@@ -27,9 +27,9 @@ def SavePkts(info, name, sfilename, srcIP, Host):
     #saving raw data
     with open('./Pkts/%s/raw_%s.txt' %(sfilename, name), 'a') as fp: fp.write(info)
     
+    Host = Host if Host else 'Unknow'
     s = './Pkts/%s/%s/%s' %(sfilename, srcIP, Host)
     if not os.path.exists(s): os.makedirs(s)
-
     with open('./Pkts/%s/%s/%s/%s.txt' %(sfilename, srcIP, Host, name), 'w') as fp: fp.write(info)
     
 
@@ -44,6 +44,7 @@ def Analysis(sfilename, iHost):
     for ip in srcIP:
         print '[' + putColor(ip, 'green') + ']'
         Host = os.listdir('./Pkts/%s/%s' %(sfilename, ip))
+        #print Host
         Hostnum += len(Host)
         for host in Host:
             if host in iHost: print '  [-]' + putColor(host, 'red')
@@ -65,11 +66,11 @@ def Abandon(sfilename, tfile):
         if raw_input('[!]%s [yes: yes/others: no]: ' %(putColor('Abandon this Pkts file?', 'red'))) == "yes": 
             commands.getoutput('sudo rm -r ./Pkts/%s/' %(sfilename))
             print '  [-]%s' %putColor('successfully!', 'yellow')
+            
     elif tfile == 'pcap': 
         if raw_input('[!]%s [yes: yes/others: no]: ' %(putColor('Abandon this Pcap file?', 'red'))) == "yes": 
             commands.getoutput('sudo rm ./Pcaps/%s.pcap' %(sfilename))
             print '  [-]%s' %putColor('successfully!', 'yellow')    
-    
     
     
     
