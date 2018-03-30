@@ -198,7 +198,7 @@ class Sniffer:
         if self.outputmode == '1':
             print '\r' + ' '*200 + '\n' + '\n'.join(info)
 
-        self.Plugin(None, 'QzoneCookie', args=[pkt.src, pkt.Cookie])
+        #self.Plugin(None, 'QzoneCookie', args=[pkt.src, pkt.Cookie])
         
     def Plugin(self, pkt, plugname, args=[]):
         #Your plug-in in ./Plugin
