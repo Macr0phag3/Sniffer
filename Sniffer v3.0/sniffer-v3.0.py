@@ -212,9 +212,10 @@ class Sniffer:
 
         #And you can use Notify() to notify yourself when the plug found some interesting things.
         
-        if plugname == 'QzoneCookie':
-            import Plugin.QzoneCookie as Qzone
-            Qzone.QzoneCookieUsage(args)
+        
+        #if plugname == 'QzoneCookie':
+        #    import Plugin.QzoneCookie as Qzone
+        #    Qzone.QzoneCookieUsage(args)
             
             
         if plugname == 'fhost':
