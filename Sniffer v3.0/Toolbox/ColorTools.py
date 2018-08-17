@@ -8,7 +8,7 @@ def putColor(text, color):
     return colored(text, color = color, attrs = ['bold'])
 
 def Eraser(text):
-    return re.sub(r'\[[0-9]*m', '', text)
+    return re.sub(r'\[[0-9]*m', '', text) # a stupid bug
 
 def ClearLine(): sys.stdout.flush()
 
