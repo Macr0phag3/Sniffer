@@ -108,7 +108,6 @@ v3.0开始均为命令行参数，具体可以使用`-h` 参数来获得详细�
 
    终端的宽度要足够，否则会出现很多换行。因为覆盖同一行输出的时候是用 '\r' 实现的。
 
-   ​
 
 3. Python版本
 
@@ -136,7 +135,9 @@ v3.0开始均为命令行参数，具体可以使用`-h` 参数来获得详细�
 
 （仅限学术交流，用于非法用途概不负责）
 
- # English
+## 其他
+<img src="https://clean-1252075454.cos.ap-nanjing.myqcloud.com/20200528120800990.png" width="500">
 
-Wating...
+[![Stargazers over time](https://starchart.cc/Macr0phag3/Sniffer.svg)](https://starchart.cc/Macr0phag3/Sniffer)
+
 
